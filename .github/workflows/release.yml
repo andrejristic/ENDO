@@ -1,0 +1,50 @@
+# Builds Endo for Linux (.deb + .AppImage) and Windows (.exe) IN GITHUB'S CLOUD,
+# then attaches them to a GitHub Release. Nothing heavy runs on your machine — you
+# only push a tag. Trigger: push a tag like v0.1.0.
+name: release
+
+on:
+  push:
+    tags: ['v*']
+
+# THIS is the setting that usually makes it "not work": the workflow needs write
+# access to create the Release and upload files.
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # keytar needs libsecret headers on the Linux runner
+      - name: Linux system deps
+        if: matrix.os == 'ubuntu-latest'
+        run: sudo apt-get update && sudo apt-get install -y libsecret-1-dev
+
+      - name: Install
+        run: npm ci
+
+      - name: Sanity — PSE brain self-check
+        run: npm run build:core && npm run selfcheck
+
+      - name: Build + publish (Linux)
+        if: matrix.os == 'ubuntu-latest'
+        run: npm run build:min && npx electron-builder --linux deb AppImage --publish always
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build + publish (Windows)
+        if: matrix.os == 'windows-latest'
+        run: npm run build:min && npx electron-builder --win nsis --publish always
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

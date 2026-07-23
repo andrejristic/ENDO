@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src https://open-vsx.org; img-src 'self' data:; font-src 'self' data:; worker-src 'self' blob:;" />
+  <title>PSE IDE</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="renderer.css" />
+</head>
+<body>
+  <div id="app">
+    <div id="activitybar">
+      <button class="act" data-view="explorer" title="Explorer">📁</button>
+      <button class="act" data-view="chat" title="Endo">🧠</button>
+      <button class="act" data-view="theta" title="Theta">θ</button>
+      <button class="act" data-view="extensions" title="Ekstenzije">🧩</button>
+      <button class="act" data-view="memory" title="Memorija">🗂️</button>
+      <div class="spacer"></div>
+      <button id="langBtn" class="act" title="SR / EN">SR</button>
+      <button class="act" data-view="settings" title="Podešavanja">⚙️</button>
+    </div>
+
+    <div id="sidebar">
+      <div id="side-explorer" class="side-panel"></div>
+      <div id="side-chat" class="side-panel hidden"></div>
+      <div id="side-theta" class="side-panel hidden"></div>
+      <div id="side-extensions" class="side-panel hidden"></div>
+      <div id="side-memory" class="side-panel hidden"></div>
+      <div id="side-settings" class="side-panel hidden"></div>
+    </div>
+
+    <div id="main">
+      <div id="tabs"></div>
+      <div id="editor"></div>
+      <div id="terminal-panel" class="hidden">
+        <div id="terminal-toolbar">
+          <span data-i18n="toggle_terminal">Terminal</span>
+          <button id="terminal-close" class="mini">✕</button>
+        </div>
+        <div id="terminal-host"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-root"></div>
+  <script src="renderer.js"></script>
+</body>
+</html>

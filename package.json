@@ -1,0 +1,82 @@
+{
+  "name": "endo",
+  "productName": "Endo",
+  "version": "0.1.0",
+  "description": "A boundaried, PSE-governed coding IDE with a Guardian that tells you who can watch you before you install anything.",
+  "author": {
+    "name": "Andrej Ristic",
+    "email": "andrej.s.ristic@gmail.com"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "main": "dist/main/main.js",
+  "scripts": {
+    "clean": "rimraf dist release",
+    "build:main": "esbuild src/main/main.ts src/main/preload.ts --bundle --platform=node --format=cjs --outdir=dist/main --external:electron --external:node-pty --external:keytar --external:adm-zip",
+    "build:renderer": "node scripts/build-renderer.mjs",
+    "build:core": "tsc -p tsconfig.core.json",
+    "build": "npm run build:core && npm run build:main && npm run build:renderer",
+    "build:min": "npm run build:core && esbuild src/main/main.ts src/main/preload.ts --bundle --platform=node --format=cjs --outdir=dist/main --external:electron --external:node-pty --external:keytar --external:adm-zip --minify && node scripts/build-renderer.mjs --minify",
+    "selfcheck": "node dist/core/selfcheck.js",
+    "start": "npm run build && electron .",
+    "dist": "npm run build && electron-builder --linux deb",
+    "dist:all": "npm run build && electron-builder --linux deb AppImage",
+    "dist:free": "npm run build:min && electron-builder --linux deb AppImage",
+    "dist:win": "npm run build:min && electron-builder --win nsis",
+    "release": "npm run build:min && electron-builder -lw --publish always",
+    "dist:dir": "npm run build && electron-builder --linux dir"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.12",
+    "keytar": "^7.9.0",
+    "monaco-editor": "^0.52.0",
+    "node-pty": "^1.0.0",
+    "xterm": "^5.3.0",
+    "xterm-addon-fit": "^0.8.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "electron": "^31.0.0",
+    "electron-builder": "^24.13.3",
+    "esbuild": "^0.23.0",
+    "rimraf": "^5.0.0",
+    "typescript": "^5.5.0"
+  },
+  "build": {
+    "appId": "com.zeravatech.endo",
+    "productName": "Endo",
+    "asar": true,
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      { "from": "docs", "to": "docs" }
+    ],
+    "linux": {
+      "target": [
+        { "target": "deb", "arch": ["x64"] },
+        { "target": "AppImage", "arch": ["x64"] }
+      ],
+      "category": "Development",
+      "maintainer": "Andrej Ristic <andrej.s.ristic@gmail.com>",
+      "description": "PSE-governed coding IDE with a Guardian extension scanner.",
+      "icon": "assets/icon.png"
+    },
+    "deb": {
+      "depends": ["libnotify4", "libxtst6", "libnss3"]
+    },
+    "win": {
+      "target": ["nsis"],
+      "icon": "assets/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}

@@ -1,0 +1,13 @@
+PSE IDE
+Copyright (c) 2026 Andrej Ristic / ZeravaTech Inc. All rights reserved.
+
+Authorship notice
+  This software and the PSE (Partial Self-Extension) architecture it implements were
+  created by Andrej Ristic (ZeravaTech Inc.). Any distribution — including free,
+  obfuscated, or public-repository releases — must preserve this authorship notice and
+  attribute the work to Andrej Ristic / ZeravaTech Inc.
+
+Distribution intent (see project notes, Q25)
+  The intended end state is a free giveaway of an obfuscated build in public
+  repositories, with authorship clearly retained. The precise open/free license text
+  is To Be Determined before public release; until then all rights are reserved.
