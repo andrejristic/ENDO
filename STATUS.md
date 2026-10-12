@@ -63,4 +63,4 @@ Reproduce on your machine: `npm run build:core && npm run selfcheck` → `ALL PA
 Q1 router.ts · Q2 model/toolcall.ts · Q4 model/style.ts · Q6 keychain.ts+router.ts ·
 Q7 necessity.ts · Q8/Q9 theta.ts · Q10–12 gate.ts · Q13–15 channelGuard.ts ·
 Q16 renderer scan modal · Q18/19 memory.ts · Q20 terminal panel · Q21 theta panel ·
-Q22 provenance badges · Q23 name "PSE IDE" (working) · Q25 see LICENSE.
+Q22 provenance badges · Q23 name "PSE IDE" (working) · Q25 GPL-3.0-or-later with an authorship term; see LICENSE and NOTICE.
