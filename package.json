@@ -7,7 +7,7 @@
     "name": "Andrej Ristic",
     "email": "andrej.s.ristic@gmail.com"
   },
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "GPL-3.0-or-later",
   "main": "dist/main/main.js",
   "scripts": {
     "clean": "rimraf dist release",
@@ -54,7 +54,9 @@
       "package.json"
     ],
     "extraResources": [
-      { "from": "docs", "to": "docs" }
+      { "from": "docs", "to": "docs" },
+      { "from": "LICENSE", "to": "LICENSE" },
+      { "from": "NOTICE", "to": "NOTICE" }
     ],
     "linux": {
       "target": [
@@ -76,7 +78,8 @@
     "nsis": {
       "oneClick": false,
       "perMachine": false,
-      "allowToChangeInstallationDirectory": true
+      "allowToChangeInstallationDirectory": true,
+      "license": "LICENSE"
     }
   }
 }
