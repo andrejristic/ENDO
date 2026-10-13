@@ -79,5 +79,7 @@ self-check. Design docs: the `PSE_*` files in the parent folder; per-area detail
 
 ## Author & license
 
-Created by **Andrej Ristic / ZeravaTech Inc.** Free to use; authorship retained. See
-[`LICENSE`](LICENSE).
+Created by **Andrej Ristic / Zerava Technologies Inc.** Free and open source under the
+GNU General Public License, version 3 or later: see [`LICENSE`](LICENSE). The authorship
+notice in [`NOTICE`](NOTICE) is an additional term under section 7(b) of the GPL and must
+be kept in every copy.
