@@ -7,7 +7,7 @@
     "name": "Andrej Ristic",
     "email": "andrej.s.ristic@gmail.com"
   },
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "GPL-3.0-or-later",
   "main": "dist/main/main.js",
   "scripts": {
     "clean": "rimraf dist release",
